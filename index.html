@@ -5,209 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Working Menu Mechanic - Landscape A4</title>
     <style>
-        /* Pengaturan Kertas A4 Landscape */
-        @page {
-            size: A4 landscape;
-            margin: 10mm;
-        }
-
-        body { 
-            font-family: Arial, sans-serif; 
-            background-color: #f0f0f0; 
-            margin: 0; 
-            padding: 0; 
-        }
-
+        @page { size: A4 landscape; margin: 5mm; }
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 0; }
         .paper { 
-            background: white; 
-            width: 277mm; /* Lebar A4 Landscape dikurangi margin */
-            height: 190mm; /* Tinggi A4 Landscape dikurangi margin */
-            margin: 5mm auto; 
-            padding: 10mm; 
-            border: 1px solid #000; 
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
+            background: white; width: 287mm; height: 200mm; margin: auto; 
+            padding: 10mm; border: 1px solid #000; box-sizing: border-box;
+            display: flex; flex-direction: column;
         }
-        
-        .header-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px; }
+        .header-top { display: flex; justify-content: space-between; align-items: flex-end; }
         .title { text-align: center; font-weight: bold; font-size: 18px; flex-grow: 1; text-decoration: underline; }
-        .info-box { font-size: 13px; font-weight: bold; }
-        .input-line { border: none; border-bottom: 1px solid black; outline: none; width: 180px; padding: 2px; font-size: 14px; background: transparent; text-align: center; font-weight: bold; }
-
-        .main-container { display: flex; border: 1px solid black; border-bottom: none; flex-grow: 1; }
+        .input-line { border: none; border-bottom: 1px solid black; outline: none; width: 180px; text-align: center; font-weight: bold; }
+        .main-container { display: flex; border: 1px solid black; flex-grow: 1; }
         .left-col { width: 65%; border-right: 1px solid black; }
         .right-col { width: 35%; }
-
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        th, td { border-bottom: 1px solid black; padding: 5px; font-size: 11px; vertical-align: middle; height: 22px; }
-        th { background-color: #e0e0e0; text-align: center; font-weight: bold; }
-        
-        td, th { border-right: 1px solid black; }
-        td:last-child, th:last-child { border-right: none; }
-
-        .editable { 
-            width: 95%; 
-            border: none; 
-            outline: none; 
-            background: transparent; 
-            text-align: center; 
-            font-family: 'Courier New', monospace; 
-            font-size: 12px; 
-            font-weight: bold; 
-        }
-        
-        .bold-text-12 { font-weight: bold; text-align: center; font-size: 12px; font-family: 'Courier New', monospace; }
-        .center { text-align: center; }
-        .summary-label { background-color: #f2f2f2; font-weight: bold; text-align: left; padding-left: 10px; font-size: 11px; }
-
-        .note-section { border: 1px solid black; border-top: 1px solid black; padding: 10px; height: 50mm; }
-        .note-title { font-weight: bold; font-size: 13px; margin-bottom: 5px; display: block; }
-        .note-input { width: 100%; height: 40mm; border: none; outline: none; resize: none; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5; font-weight: bold; }
-
-        .no-print { 
-            margin-top: 10px; 
-            text-align: center; 
-            padding-bottom: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-            margin: 0 5px;
-            color: white;
-        }
+        th, td { border: 1px solid black; padding: 4px; font-size: 11px; vertical-align: middle; }
+        th { background-color: #e0e0e0; }
+        .editable { width: 95%; border: none; text-align: center; font-family: 'Courier New', monospace; font-size: 12px; font-weight: bold; }
+        .note-section { border: 1px solid black; border-top: none; padding: 10px; height: 40mm; }
+        .note-input { width: 100%; height: 30mm; border: none; resize: none; font-weight: bold; font-family: 'Courier New', monospace; }
+        .no-print { text-align: center; padding: 20px; }
+        .btn { padding: 10px 20px; font-weight: bold; cursor: pointer; border: none; border-radius: 4px; color: white; margin: 5px; }
         .btn-pdf { background: #2c3e50; }
         .btn-wa { background: #25D366; }
-
-        @media print {
-            body { background: white; }
-            .paper { border: none; box-shadow: none; width: 100%; height: auto; margin: 0; padding: 0; }
-            .no-print { display: none; }
-        }
+        @media print { .no-print { display: none; } .paper { border: none; margin: 0; } }
     </style>
 </head>
 <body>
 
-<div class="paper" id="form-mekanik">
+<div class="paper">
     <div class="header-top">
-        <div class="info-box">NAMA : <input type="text" id="namaMekanik" class="input-line"></div>
+        <div>NAMA : <input type="text" id="nama" class="input-line"></div>
         <div class="title">DAILY WORKING MENU MECHANIC</div>
-        <div class="info-box" style="text-align: right;">Daily Check list</div>
+        <div style="font-weight: bold;">Daily Check list</div>
     </div>
-    <div style="text-align: center; margin-bottom: 10px; font-weight: bold; font-size: 13px;">
+    <div style="text-align: center; margin: 10px 0; font-weight: bold;">
         DATE : <input type="text" id="autoDate" class="input-line">
     </div>
 
     <div class="main-container">
         <div class="left-col">
-            <table id="tableLeft">
-                <thead>
-                    <tr>
-                        <th style="width: 15%;">Frequently</th>
-                        <th style="width: 15%;">CT in Mins</th>
-                        <th>Working Menu</th>
-                        <th style="width: 20%;">Actual CT (min)</th>
-                    </tr>
-                </thead>
+            <table>
+                <thead><tr><th>Freq</th><th>CT</th><th>Working Menu</th><th>Actual CT</th></tr></thead>
                 <tbody>
-                    <tr><td rowspan="10" class="center bold-text-12">Daily</td><td class="bold-text-12">10</td><td>Briefing awal shift</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">90</td><td>Standby & perbaikan mesin</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">60</td><td>Update persiapan QCO</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">60</td><td>Pengecekan & update PM</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">30</td><td>5S area line</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">15</td><td>Laporan setengah hari</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">90</td><td>Response perbaikan line</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">30</td><td>Laporan buku harian</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">30</td><td>Mechanic DOM meeting</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="bold-text-12">60</td><td>Training</td><td><input type="number" class="editable act-ct"></td></tr>
-                    <tr><td class="summary-label">MH used</td><td class="bold-text-12"><input type="text" id="mhUsed" class="editable" value="475"></td><td colspan="2" style="background-color: #fafafa;"></td></tr>
-                    <tr><td class="summary-label">MH available</td><td class="bold-text-12"><input type="text" id="mhAvail" class="editable" value="480"></td><td colspan="2" style="background-color: #fafafa;"></td></tr>
-                    <tr><td class="summary-label">Productivity</td><td class="bold-text-12"><input type="text" id="prodPercent" class="editable" value="99%"></td><td colspan="2" style="background-color: #fafafa;"></td></tr>
+                    <script>
+                        const menus = ["Briefing awal shift", "Standby & perbaikan mesin", "Update persiapan QCO", "Pengecekan & update PM", "5S area line", "Laporan setengah hari", "Response perbaikan line", "Laporan buku harian", "Mechanic DOM meeting", "Training"];
+                        const cts = [10, 90, 60, 60, 30, 15, 90, 30, 30, 60];
+                        menus.forEach((m, i) => {
+                            document.write(`<tr>${i==0?'<td rowspan="10" align="center">Daily</td>':''}<td>${cts[i]}</td><td>${m}</td><td><input type="text" class="editable act-ct"></td></tr>`);
+                        });
+                    </script>
+                    <tr><td colspan="2"><b>MH used</b></td><td colspan="2"><b><input type="text" id="mhUsed" class="editable" value="475"></b></td></tr>
+                    <tr><td colspan="2"><b>MH available</b></td><td colspan="2"><b><input type="text" id="mhAvail" class="editable" value="480"></b></td></tr>
+                    <tr><td colspan="2"><b>Productivity</b></td><td colspan="2"><b><input type="text" id="prod" class="editable" value="99%"></b></td></tr>
                 </tbody>
             </table>
         </div>
-
         <div class="right-col">
             <table>
-                <thead>
-                    <tr><th style="width: 12%;">#</th><th>Item</th><th style="width: 35px;">Yes</th><th style="width: 35px;">No</th></tr>
-                </thead>
+                <thead><tr><th width="15%">#</th><th>Item</th><th width="15%">Y</th><th width="15%">N</th></tr></thead>
                 <tbody>
-                    <tr><td class="bold-text-12">1</td><td>PM list update?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
-                    <tr><td class="bold-text-12">2</td><td>Kabel & selang rapi?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
-                    <tr><td class="bold-text-12">3</td><td>Kolong mesin bersih?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
-                    <tr><td class="bold-text-12">4</td><td>Tiang benang kencang?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
-                    <tr><td class="bold-text-12">5</td><td>Mesin line bersih?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
-                    <tr><td class="bold-text-12">6</td><td>Kebocoran angin?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
-                    <tr><td class="bold-text-12">7</td><td>Kaki meja kokoh?</td><td class="center"><input type="checkbox" class="chk-item"></td><td class="center"><input type="checkbox"></td></tr>
+                    <script>
+                        const items = ["PM list update?", "Kabel & selang rapi?", "Kolong mesin bersih?", "Tiang benang kencang?", "Mesin line bersih?", "Kebocoran angin?", "Kaki meja kokoh?"];
+                        items.forEach((item, i) => {
+                            document.write(`<tr><td align="center">${i+1}</td><td>${item}</td><td align="center"><input type="checkbox"></td><td align="center"><input type="checkbox"></td></tr>`);
+                        });
+                    </script>
                 </tbody>
             </table>
             <table style="border-top: none;">
-                <thead>
-                    <tr><th colspan="4" style="background-color: #e0e0e0;">QCO</th></tr>
-                    <tr><th>Line</th><th colspan="2">Style</th><th>Date</th></tr>
-                </thead>
+                <thead><tr><th colspan="3">QCO</th></tr><tr><th>Line</th><th>Style</th><th>Date</th></tr></thead>
                 <tbody>
-                    <script>
-                        for(let i=0; i<5; i++) {
-                            document.write(`<tr>
-                                <td><input type="text" class="editable"></td>
-                                <td colspan="2"><input type="text" class="editable"></td>
-                                <td><input type="text" class="editable"></td>
-                            </tr>`);
-                        }
-                    </script>
+                    <script>for(let i=0; i<5; i++) document.write('<tr><td><input class="editable"></td><td><input class="editable"></td><td><input class="editable"></td></tr>');</script>
                 </tbody>
             </table>
         </div>
     </div>
-
     <div class="note-section">
-        <span class="note-title">NOTE :</span>
-        <textarea id="noteInput" class="note-input" placeholder="Tulis catatan di sini..."></textarea>
+        <b>NOTE :</b><br>
+        <textarea id="note" class="note-input" placeholder="Tulis catatan perbaikan di sini..."></textarea>
     </div>
 </div>
 
 <div class="no-print">
     <button onclick="window.print()" class="btn btn-pdf">SIMPAN PDF / CETAK</button>
-    <button onclick="kirimWhatsApp()" class="btn btn-wa">KIRIM KE WHATSAPP</button>
+    <button onclick="sendWA()" class="btn btn-wa">KIRIM RINGKASAN WA</button>
 </div>
 
 <script>
-    window.onload = function() {
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const yyyy = today.getFullYear();
-        document.getElementById('autoDate').value = dd + ' / ' + mm + ' / ' + yyyy;
+    window.onload = () => {
+        const t = new Date();
+        document.getElementById('autoDate').value = `${String(t.getDate()).padStart(2,'0')}/${String(t.getMonth()+1).padStart(2,'0')}/${t.getFullYear()}`;
     };
 
-    function kirimWhatsApp() {
-        const nama = document.getElementById('namaMekanik').value || "-";
-        const tgl = document.getElementById('autoDate').value;
-        const mhUsed = document.getElementById('mhUsed').value;
-        const prod = document.getElementById('prodPercent').value;
-        const note = document.getElementById('noteInput').value || "-";
-
-        // Menyusun teks pesan
-        let pesan = `*LAPORAN HARIAN MEKANIK*%0A`;
-        pesan += `--------------------------%0A`;
-        pesan += `*Nama:* ${nama}%0A`;
-        pesan += `*Tanggal:* ${tgl}%0A`;
-        pesan += `*MH Used:* ${mhUsed}%0A`;
-        pesan += `*Productivity:* ${prod}%0A`;
-        pesan += `*Note:* ${note}%0A%0A`;
-        pesan += `_Laporan lengkap tersedia dalam format PDF yang telah dicetak._`;
-
-        const url = `https://wa.me/?text=${pesan}`;
-        window.open(url, '_blank');
+    function sendWA() {
+        const nama = document.getElementById('nama').value || "-";
+        const prod = document.getElementById('prod').value;
+        const note = document.getElementById('note').value || "-";
+        let text = `*LAPORAN MEKANIK*%0A*Nama:* ${nama}%0A*Prod:* ${prod}%0A*Note:* ${note}%0A%0A_Silakan lampirkan file PDF hasil cetakan di bawah ini._`;
+        window.open(`https://wa.me/?text=${text}`, '_blank');
     }
 </script>
-
 </body>
 </html>
