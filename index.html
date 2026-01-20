@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Working Menu Mechanic - Final Precision</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
+        .paper { background: white; width: 1000px; margin: auto; padding: 25px; border: 1px solid #000; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        
+        /* Header Section */
+        .header-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px; }
+        .title { text-align: center; font-weight: bold; font-size: 16px; flex-grow: 1; padding-bottom: 5px; text-decoration: underline; }
+        .info-box { font-size: 13px; font-weight: bold; }
+        .input-line { border: none; border-bottom: 1px solid black; outline: none; width: 150px; padding: 2px; font-size: 14px; background: transparent; text-align: center; font-weight: bold; }
+
+        /* Master Table Structure */
+        .main-container { display: flex; border: 1px solid black; border-bottom: none; }
+        .left-col { width: 65%; border-right: 1px solid black; }
+        .right-col { width: 35%; }
+
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th, td { border-bottom: 1px solid black; padding: 6px; font-size: 11px; vertical-align: middle; height: 22px; }
+        th { background-color: #e0e0e0; text-align: center; font-weight: bold; }
+        
+        /* Penyelarasan Garis Vertical */
+        td, th { border-right: 1px solid black; }
+        td:last-child, th:last-child { border-right: none; }
+
+        /* Ukuran Font Angka 12px Bold */
+        .editable { 
+            width: 95%; 
+            border: none; 
+            outline: none; 
+            background: transparent; 
+            text-align: center; 
+            font-family: 'Courier New', monospace; 
+            font-size: 12px; 
+            font-weight: bold; 
+            color: #000;
+        }
+        
+        .bold-text-12 {
+            font-weight: bold;
+            text-align: center;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .center { text-align: center; }
+        
+        /* Area Summary MH */
+        .summary-label { background-color: #f2f2f2; font-weight: bold; text-align: left; padding-left: 10px; font-size: 11px; }
+
+        /* Note Section */
+        .note-section { border: 1px solid black; border-top: 1px solid black; padding: 10px; min-height: 200px; }
+        .note-title { font-weight: bold; font-size: 13px; margin-bottom: 5px; display: block; }
+        .note-input { width: 100%; height: 180px; border: none; outline: none; resize: none; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5; font-weight: bold; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .paper { border: none; box-shadow: none; width: 100%; padding: 10px; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="paper">
+    <div class="header-top">
+        <div class="info-box">NAMA : <input type="text" class="input-line"></div>
+        <div class="title">DAILY WORKING MENU MECHANIC</div>
+        <div class="info-box" style="text-align: right;">Daily Check list</div>
+    </div>
+    <div style="text-align: center; margin-bottom: 10px; font-weight: bold; font-size: 13px;">
+        DATE : <input type="text" id="autoDate" class="input-line">
+    </div>
+
+    <div class="main-container">
+        <div class="left-col">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Frequently</th>
+                        <th style="width: 15%;">CT in Mins</th>
+                        <th>Working Menu</th>
+                        <th style="width: 20%;">Actual CT (min)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="10" class="center bold-text-12">Daily</td>
+                        <td class="bold-text-12">10</td>
+                        <td>Mengikuti Briefing awal shift dengan team leader nya</td>
+                        <td><input type="text" class="editable"></td>
+                    </tr>
+                    <tr><td class="bold-text-12">90</td><td>Standby, response dan perbaikan mesin di line</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">60</td><td>Melakukan update persiapan QCO dan setup mesin</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">60</td><td>Melakukan pengecekan, perbaikan, update PM, Melakukan PM</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">30</td><td>Melakukan pengecekan dan perbaikan 5S di area line</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">15</td><td>Membuat laporan aktivitas setengah hari pertama ke leader</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">90</td><td>Response dan perbaikan mesin di line</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">30</td><td>Membuat laporan buku harian mechanic dan problem solving</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">30</td><td>Mechanic DOM meeting</td><td><input type="text" class="editable"></td></tr>
+                    <tr><td class="bold-text-12">60</td><td>Training</td><td><input type="text" class="editable"></td></tr>
+                    
+                    <tr>
+                        <td class="summary-label">MH used</td>
+                        <td class="bold-text-12">475</td>
+                        <td colspan="2" style="background-color: #fafafa;"></td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">MH available</td>
+                        <td class="bold-text-12">480</td>
+                        <td colspan="2" style="background-color: #fafafa;"></td>
+                    </tr>
+                    <tr>
+                        <td class="summary-label">Productivity</td>
+                        <td class="bold-text-12">99%</td>
+                        <td colspan="2" style="background-color: #fafafa;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="right-col">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">#</th>
+                        <th>Item</th>
+                        <th style="width: 35px;">Yes</th>
+                        <th style="width: 35px;">No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="bold-text-12">1</td><td>PM list sudah update?</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                    <tr><td class="bold-text-12">2</td><td>Kabel dan selang tegak lurus</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                    <tr><td class="bold-text-12">3</td><td>Kabel kolong mesin dirapikan</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                    <tr><td class="bold-text-12">4</td><td>Tiang benang kencang</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                    <tr><td class="bold-text-12">5</td><td>Mesin di line bersih</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                    <tr><td class="bold-text-12">6</td><td>Ada kebocoran angin</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                    <tr><td class="bold-text-12">7</td><td>Kaki meja kokoh</td><td class="center"><input type="checkbox"></td><td class="center"><input type="checkbox"></td></tr>
+                </tbody>
+            </table>
+
+            <table style="border-top: none;">
+                <thead>
+                    <tr><th colspan="4" style="background-color: #e0e0e0;">QCO</th></tr>
+                    <tr>
+                        <th style="width: 25%;">Line</th>
+                        <th colspan="2">Style</th>
+                        <th style="width: 30%;">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <script>
+                        for(let i=0; i<6; i++) {
+                            document.write(`<tr>
+                                <td><input type="text" class="editable"></td>
+                                <td colspan="2"><input type="text" class="editable"></td>
+                                <td><input type="text" class="editable"></td>
+                            </tr>`);
+                        }
+                    </script>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="note-section">
+        <span class="note-title">NOTE :</span>
+        <textarea class="note-input" placeholder="Tulis catatan di sini..."></textarea>
+    </div>
+
+    <div class="no-print" style="margin-top: 20px; text-align: right;">
+        <button onclick="window.print()" style="padding: 10px 25px; font-weight: bold; cursor: pointer; background: #2c3e50; color: white; border: none; border-radius: 4px;">CETAK PDF</button>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        document.getElementById('autoDate').value = dd + ' / ' + mm + ' / ' + yyyy;
+    };
+</script>
+
+</body>
+</html>
